@@ -4,6 +4,9 @@
 body {
     background-color: white;
     color: #000000;
-    font-family: 'Inter',  sans-serif;
-    
+    font-family: 'Inter',  sans-serif;   
+}
+
+@theme {
+    --color-primary: #002C66;
 }

@@ -5,15 +5,6 @@ export default defineNuxtConfig({
     compatibilityVersion: 4
   },
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxt/fonts'],
+  modules: ['@nuxt/ui'],
   css: ['~/assets/css/main.css'],
-  fonts: {
-    families: [
-      {
-        name: 'Inter',
-        provider: 'google',
-        weights: [400, 500]
-      }
-    ]
-  }
 })

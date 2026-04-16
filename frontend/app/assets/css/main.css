@@ -3,5 +3,7 @@
 
 body {
     background-color: white;
-    color: black
+    color: #000000;
+    font-family: 'Inter',  sans-serif;
+    
 }

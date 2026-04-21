@@ -47,7 +47,7 @@
             </div>
           </div>
           <div>
-            <label class="block text-sm font-medium mb-1">password</label>
+            <label class="block text-sm font-medium mb-1">Password</label>
             <div class="relative border border-gray-700  rounded-lg px-3">
               <UIcon name="i-lucide-lock" size="md"/>
               <input type="text" class="pr-10 pl-2 py-2 focus:outline-none">

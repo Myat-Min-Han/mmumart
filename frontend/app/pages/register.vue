@@ -1,6 +1,4 @@
 <script setup>
-
-
 </script>
 
 <template>
@@ -61,7 +59,7 @@
         </form>
         <div class="text-center text-sm">
           Already have an account? 
-          <NuxtLink to="/sign-in" class="font-semibold">Sign in</NuxtLink>
+          <NuxtLink to="/login" class="font-semibold">Log in</NuxtLink>
         </div>
       </div>
     </section>

@@ -3,21 +3,10 @@
 
   const navLinks = ref(['Textbooks', 'Electronics', 'Services', 'Campus Gear'])
   const searchText = ref('')
-
-  const featuredTitle = ref('Featured Picks')
-  const products = ref([
-    { name: 'Calculator', price: 'RM 145.00' },
-    { name: 'Keyboard', price: 'RM 210.00' },
-    { name: 'Notebook', price: 'RM 45.00' }
-  ])
-
-  const ctaTitle = ref('Your unused gear could help others')
-  const ctaText = ref('Turn materials into funds.')
-  const ctaButton = ref('Post Your First Listing')
 </script>
 
 <template>
-  <div class="max-w-300 mx-auto px-4">
+  <div class="max-w-300 mx-auto px-4 mb-10">
 
     <!-- Navbar -->
     <div class="flex justify-between items-center py-4">
@@ -100,30 +89,24 @@
       </section>
     </div>
 
-    <!-- Products -->
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">{{ featuredTitle }}</h2>
-
-      <div class="flex gap-4">
-        <div
-          v-for="item in products"
-          :key="item.name"
-          class="bg-white p-4 rounded-lg shadow w-48"
-        >
-          <p class="font-medium">{{ item.name }}</p>
-          <p class="text-gray-600">{{ item.price }}</p>
-        </div>
-      </div>
-    </div>
-
     <!-- CTA -->
-    <div class="mt-8 bg-white p-6 rounded-lg shadow">
-      <h2 class="text-lg font-semibold mb-2">{{ ctaTitle }}</h2>
-      <p class="text-gray-600 mb-4">{{ ctaText }}</p>
+    <div class="mt-8 bg-gray-50 p-6 rounded-lg shadow grid grid-cols-2">
+     <div>
+        <h1 class="text-3xl font-semibold mb-2 text-primary">Your unused gear could be another student's breakthrough.</h1>
+        <p class="text-gray-600 mb-4">Turn your materials into funds.</p>
 
-      <button class="bg-blue-600 text-white px-4 py-2 rounded">
-        {{ ctaButton }}
-      </button>
+        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer">
+          Post your Item
+        </button>
+     </div>
+     <div class="grid grid-cols-2 gap-6">
+        <div class="h-50">
+          <img src="/img/campus_gear_2.png" alt="campus_gear_2" class="w-full h-full object-cover rounded-lg rotate-6">
+        </div>
+        <div class="h-50">
+          <img src="/img/electronics_2.png" alt="electronics_2" class="w-full h-full object-cover rounded-lg -rotate-4">
+        </div>
+     </div>
     </div>
 
   </div>

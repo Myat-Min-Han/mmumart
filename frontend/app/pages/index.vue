@@ -9,7 +9,7 @@
   <div class="max-w-300 mx-auto px-4 mb-10">
 
     <!-- Navbar -->
-    <div class="flex justify-between items-center py-4">
+    <nav class="flex justify-between items-center py-4">
       <div class="text-xl font-bold text-primary">MMUMART</div>
 
       <div class="flex gap-4">
@@ -22,13 +22,18 @@
         </a>
       </div>
 
-      <input
-        v-model="searchText"
-        type="text"
-        placeholder="Search..."
-        class="border rounded px-3 py-1 outline-none focus:ring-1 focus:ring-primary"
-      />
-    </div>
+      <div>
+        <a href="/login">
+          Login
+        </a>
+        <a 
+        class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium "
+        href="/register"
+        >
+          Register
+        </a>
+      </div>
+    </nav>
 
     <!-- Hero -->
     <div class="bg-primary text-white p-10 rounded-xl mt-4">

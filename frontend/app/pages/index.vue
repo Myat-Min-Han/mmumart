@@ -1,48 +1,15 @@
-<script setup>
-  import { ref } from 'vue'
-
-  const navLinks = ref(['Textbooks', 'Electronics', 'Services', 'Campus Gear'])
-  const searchText = ref('')
-</script>
 
 <template>
   <div class="max-w-300 mx-auto px-4 mb-10">
-
-    <!-- Navbar -->
-    <nav class="flex justify-between items-center py-4">
-      <div class="text-xl font-bold text-primary">MMUMART</div>
-
-      <div class="flex gap-4">
-        <a
-          v-for="link in navLinks"
-          :key="link"
-          class="text-gray-500 hover:text-primary cursor-pointer"
-        >
-          {{ link }}
-        </a>
-      </div>
-
-      <div>
-        <a href="/login">
-          Login
-        </a>
-        <a 
-        class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium "
-        href="/register"
-        >
-          Register
-        </a>
-      </div>
-    </nav>
 
     <!-- Hero -->
     <div class="bg-primary text-white p-10 rounded-xl mt-4">
       <h1 class="text-4xl font-bold mb-2">Discover Quality Campus Essentials.</h1>
       <p class="mb-4 text-gray-500">Buy, sell, and trade academic materials.</p>
 
-      <button class="bg-white text-primary px-4 py-2 rounded-md mr-2 text-sm font-medium">
+      <a href="/products" class="bg-white text-primary px-4 py-2 rounded-md mr-2 text-sm font-medium">
         Start Exploring
-      </button>
+      </a>
 
       <button class="bg-blue-700 px-4 py-2 rounded-md text-sm font-medium">
         Become a Seller

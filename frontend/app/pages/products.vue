@@ -12,7 +12,8 @@ const sortBy = ref('Newest')
 const sortOptions = ['Newest', 'Price: Low to High', 'Price: High to Low', 'Popularity']
 
 const minPrice = ref(0)
-const maxPrice = ref(1000)
+const maxPrice = ref(1000);
+const page = ref(0);
 
 const products = [
     {
@@ -192,5 +193,8 @@ const toggleCategory = (categoryName) => {
                 </div>
             </div>
         </section>
+        <footer class="flex items-center justify-center my-6">
+            <UPagination v-model:page="page" :total="100"  :items-per-page="20" color="primary" active-color="secondary"/>
+        </footer>
     </main>
 </template>

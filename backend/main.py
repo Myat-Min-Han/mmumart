@@ -3,7 +3,8 @@ from flask_cors import CORS
 from routes.user import user_bp
 
 app = Flask(__name__)
-CORS(app)
+
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 app.register_blueprint(user_bp)
 if __name__ == "__main__":

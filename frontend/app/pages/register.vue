@@ -1,4 +1,42 @@
 <script setup>
+definePageMeta({
+  layout: false
+})
+
+const formData = ref({
+  name: '',
+  email: '',
+  password: ''
+})
+
+const isLoading = ref(false)
+const toast = useToast()
+
+const handleRegister = async () => {
+  isLoading.value = true
+  try {
+    const response = await $fetch('http://localhost:5001/users/signup', {
+      method: 'POST',
+      body: formData.value
+    })
+    
+    toast.add({
+      title: 'Success',
+      description: response.message,
+      color: 'green'
+    })
+    
+    navigateTo('/login')
+  } catch (err) {
+    toast.add({
+      title: 'Error',
+      description: err.data?.error || 'Failed to create account',
+      color: 'red'
+    })
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -31,30 +69,30 @@
         <h1 class="text-2xl font-semibold mb-2">Create your account</h1>
         <p class="opacity-70 mb-5">Get started with your academic emaill address</p>
 
-        <form  class="flex flex-col gap-5 mb-2">
+        <form @submit.prevent="handleRegister" class="flex flex-col gap-5 mb-2">
           <div>
             <label class="block text-sm font-medium mb-1">Full Name</label>
-            <div class="relative border border-gray-700  rounded-lg px-3">
+            <div class="relative border border-gray-700  rounded-lg px-3 flex items-center">
               <UIcon name="i-lucide-user" size="md"/>
-              <input type="text" class="pr-10 pl-2 py-2 focus:outline-none">
+              <input v-model="formData.name" type="text" required class="pr-10 pl-2 py-2 focus:outline-none w-full">
             </div>
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">MMU Student/Staff Email</label>
-            <div class="relative border border-gray-700  rounded-lg px-3">
+            <div class="relative border border-gray-700  rounded-lg px-3 flex items-center">
               <UIcon name="i-lucide-at-sign" size="md"/>
-              <input type="text" class="pr-10 pl-2 py-2 focus:outline-none">
+              <input v-model="formData.email" type="email" required class="pr-10 pl-2 py-2 focus:outline-none w-full">
             </div>
           </div>
           <div>
             <label class="block text-sm font-medium mb-1">Password</label>
-            <div class="relative border border-gray-700  rounded-lg px-3">
+            <div class="relative border border-gray-700  rounded-lg px-3 flex items-center">
               <UIcon name="i-lucide-lock" size="md"/>
-              <input type="text" class="pr-10 pl-2 py-2 focus:outline-none">
+              <input v-model="formData.password" type="password" required class="pr-10 pl-2 py-2 focus:outline-none w-full">
             </div>
           </div>
-          <button type="submit" class="w-100 px-3 py-2 text-white bg-primary rounded-lg cursor-pointer">
-            Create Account
+          <button :disabled="isLoading" type="submit" class="w-100 px-3 py-2 text-white bg-primary rounded-lg cursor-pointer disabled:opacity-50">
+            {{ isLoading ? 'Creating Account...' : 'Create Account' }}
           </button>
         </form>
         <div class="text-center text-sm">

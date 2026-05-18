@@ -1,6 +1,6 @@
 import datetime
 import jwt
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, g
 from sqlalchemy.orm import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from backend.decorators.auth import token_required
@@ -9,6 +9,7 @@ from db.models.user import User
 
 user_bp = Blueprint("user", __name__, url_prefix="/users")
 SECRET_KEY = "David is GOATED"
+
 @user_bp.route("/signup", methods=["POST"])
 def register():
     data = request.json
@@ -49,7 +50,7 @@ def login():
     payload = {
         "user_id": user.id,
         "email": user.email,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)  # expires in 1 hour
+        "exp": datetime.datetime.unow(datetime.UTC) + datetime.timedelta(hours=1)  # expires in 1 hour
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     return jsonify({"message": "Login successful!", "token": token}), 200
@@ -57,7 +58,15 @@ def login():
 @user_bp.route("/profile", methods=["GET"])
 @token_required
 def profile():
-    return jsonify({
-        "id": g.current_user["user_id"],
-        "email": g.current_user["email"]
-    }), 200
+    user_id = g.current_user.get('user_id')
+    with Session(engine) as session:
+        user = session.query(User).filter_by(id=user_id).first()
+        if not user: 
+            return jsonify({ "error": "User not found"}), 404
+        
+        return jsonify({
+            "id": user.id,
+            "email": user.email,
+            "name": user.name
+        }), 200
+

@@ -1,7 +1,10 @@
+
 <template>
   <div>
     <nav class="flex justify-between items-center p-5">
-      <div class="text-xl font-bold text-primary">MMUMART</div>
+      <NuxtLink to="/" class="text-xl font-bold text-primary">
+      MMUMART
+      </NuxtLink>
 
       <div class="relative border rounded-md px-3">
         <UIcon name="i-lucide-search" size="md"/>

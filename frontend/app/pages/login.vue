@@ -1,4 +1,5 @@
 <script setup>
+
 definePageMeta({
   layout: false
 })
@@ -14,10 +15,14 @@ const toast = useToast()
 const handleLogin = async () => {
   isLoading.value = true
   try {
-    const response = await $fetch('http://localhost:5001/users/login', {
+    const response = await $fetch('http://localhost:5002/users/login', {
       method: 'POST',
       body: formData.value
-    })
+    });
+
+    // set the cookie 
+    const token = useCookie('jwt')
+    token.value = response.token
     
     toast.add({
       title: 'Success',

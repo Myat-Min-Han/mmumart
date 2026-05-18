@@ -1,4 +1,14 @@
 
+<script setup>
+  const token = useCookie('jwt')
+
+  const logout = () => {
+    token.value = null
+    navigateTo('/login')
+  }
+
+</script>
+
 <template>
   <div>
     <nav class="flex justify-between items-center p-5">
@@ -23,12 +33,12 @@
         </NuxtLink>
       </div>
       <div v-else>
-        <a
-          class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium"
-          to="/logout"
+        <button
+          @click="logout"
+          class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
         >
           Logout
-        </a>
+        </button>
       </div>
     </nav>
     <slot />

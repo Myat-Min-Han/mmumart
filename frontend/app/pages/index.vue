@@ -11,9 +11,9 @@
         Start Exploring
       </a>
 
-      <button class="bg-blue-700 px-4 py-2 rounded-md text-sm font-medium">
+      <a href="/listing" class="bg-blue-700 px-4 py-2 rounded-md text-sm font-medium">
         Become a Seller
-      </button>
+      </a>
     </div>
 
     <!-- Categories -->

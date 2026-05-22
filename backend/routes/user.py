@@ -3,12 +3,12 @@ import jwt
 from flask import Blueprint, request, jsonify, g
 from sqlalchemy.orm import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-from backend.decorators.auth import token_required
+from decorators.auth import token_required
 from db.index import engine
 from db.models.user import User
+from config import SECRET_KEY
 
 user_bp = Blueprint("user", __name__, url_prefix="/users")
-SECRET_KEY = "David is GOATED"
 
 @user_bp.route("/signup", methods=["POST"])
 def register():
@@ -46,11 +46,11 @@ def login():
         user = session.query(User).filter_by(email=email).first()
         if not user or not check_password_hash(user.password, password):
             return jsonify({"error": "Invalid email or password"}), 401
-        
+
     payload = {
         "user_id": user.id,
         "email": user.email,
-        "exp": datetime.datetime.unow(datetime.UTC) + datetime.timedelta(hours=1)  # expires in 1 hour
+        "exp": datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=1)  # expires in 1 hour
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     return jsonify({"message": "Login successful!", "token": token}), 200

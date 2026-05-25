@@ -42,7 +42,9 @@ const handleRegister = async () => {
 <template>
   <main class="grid grid-cols-2 h-screen">
     <section class="p-10 bg-primary text-white">
-      <h1 class="text-xl font-medium">MMUMART</h1>
+      <NuxtLink to="/" class="text-xl font-medium" >
+      MMUMART
+      </NuxtLink>
       <div class="mt-20">
         <h1 class="font-bold w-140 text-4xl mb-4">The curated marketplace for students</h1>
         <p class="opacity-45 mb-10">

@@ -1,46 +1,68 @@
-
 <script setup>
-  const token = useCookie('jwt')
+const token = useCookie('jwt')
 
-  const logout = () => {
-    token.value = null
-    navigateTo('/login')
-  }
-
+const logout = () => {
+  token.value = null
+  navigateTo('/login')
+}
 </script>
 
 <template>
   <div>
     <nav class="flex justify-between items-center p-5">
+      
+      <!-- Logo -->
       <NuxtLink to="/" class="text-xl font-bold text-primary">
-      MMUMART
+        MMUMART
       </NuxtLink>
 
-      <div class="relative border rounded-md px-3">
-        <UIcon name="i-lucide-search" size="md"/>
-        <input placeholder="Search the product" class="pr-10 pl-2 py-2 focus:outline-none"/>
+      <!-- Search -->
+      <div class="relative border rounded-md px-3 flex items-center">
+        <UIcon name="i-lucide-search" size="md" />
+        <input
+          placeholder="Search the product"
+          class="pr-10 pl-2 py-2 focus:outline-none"
+        />
       </div>
 
-      <div v-if="!token">
-        <NuxtLink to="/login">
-          Login
-        </NuxtLink>
-        <NuxtLink 
-          class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium"
-          to="/register"
+      <!-- Right side -->
+      <div class="flex items-center">
+
+        <!-- Feedback -->
+        <NuxtLink
+          to="/feedback"
+          class="mr-4 text-sm font-medium hover:text-primary"
         >
-          Register
+          Feedback
         </NuxtLink>
-      </div>
-      <div v-else>
-        <button
-          @click="logout"
-          class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-        >
-          Logout
-        </button>
+
+        <!-- 未登录 -->
+        <div v-if="!token" class="flex items-center">
+          <NuxtLink to="/login">
+            Login
+          </NuxtLink>
+
+          <NuxtLink
+            class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium"
+            to="/register"
+          >
+            Register
+          </NuxtLink>
+        </div>
+
+        <!-- 已登录 -->
+        <div v-else>
+          <button
+            @click="logout"
+            class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
+          >
+            Logout
+          </button>
+        </div>
+
       </div>
     </nav>
+
     <slot />
   </div>
 </template>

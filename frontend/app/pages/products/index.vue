@@ -170,7 +170,7 @@ const toggleCategory = (categoryName) => {
             <!-- Product Grid -->
             <div class="flex-1">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div v-for="product in products" :key="product.id" class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
+                    <NuxtLink v-for="product in products" :key="product.id" :to="`/products/${product.id}`" class="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
                         <div class="relative aspect-square overflow-hidden">
                             <img :src="product.image" :alt="product.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute top-2 right-2">
@@ -189,7 +189,7 @@ const toggleCategory = (categoryName) => {
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </NuxtLink>
                 </div>
             </div>
         </section>

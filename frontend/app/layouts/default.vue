@@ -27,16 +27,13 @@ const logout = () => {
 
       <!-- Right side -->
       <div class="flex items-center">
-
-        <!-- Feedback -->
         <NuxtLink
           to="/feedback"
-          class="mr-4 text-sm font-medium hover:text-primary"
+          class="mr-4"
         >
           Feedback
         </NuxtLink>
 
-        <!-- 未登录 -->
         <div v-if="!token" class="flex items-center">
           <NuxtLink to="/login">
             Login
@@ -50,7 +47,6 @@ const logout = () => {
           </NuxtLink>
         </div>
 
-        <!-- 已登录 -->
         <div v-else>
           <button
             @click="logout"

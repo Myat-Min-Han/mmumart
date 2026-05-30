@@ -67,9 +67,9 @@
         <h1 class="text-3xl font-semibold mb-2 text-primary">Your unused gear could be another student's breakthrough.</h1>
         <p class="text-gray-600 mb-4">Turn your materials into funds.</p>
 
-        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer">
+        <a href="/listing" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer">
           Post your Item
-        </button>
+        </a>
      </div>
      <div class="grid grid-cols-2 gap-6">
         <div class="h-50">

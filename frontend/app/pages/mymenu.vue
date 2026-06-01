@@ -19,8 +19,8 @@
 
     <!-- User Info -->
     <div class="text-center mt-12 px-6">
-      <h2 class="text-lg font-semibold text-primary">Li Xiaoming</h2>
-      <p class="text-xs text-gray-400 mt-1">Member · ID: 8812345</p>
+      <h2 class="text-lg font-semibold text-primary">undefined</h2>
+      <p class="text-xs text-gray-400 mt-1">Member · ID: </p>
     </div>
 
     <!-- Stats -->

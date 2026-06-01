@@ -47,7 +47,7 @@
         class="w-full flex items-center gap-3 px-4 py-3.5 border-b border-gray-50 last:border-b-0 hover:bg-blue-50 active:bg-blue-100 transition-colors text-left"
         @click="$router.push(item.route)"
       >
-        <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 text-secondary">
+        <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 text-secondary">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" :d="item.iconPath" />
           </svg>
@@ -56,10 +56,10 @@
           <p class="text-sm font-medium text-primary">{{ item.title }}</p>
           <p class="text-xs text-gray-400 mt-0.5">{{ item.subtitle }}</p>
         </div>
-        <span v-if="item.badge" class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-secondary flex-shrink-0">
+        <span v-if="item.badge" class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-secondary shrink-0">
           {{ item.badge }}
         </span>
-        <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg class="w-4 h-4 text-gray-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
         </svg>
       </button>
@@ -76,7 +76,7 @@
         class="w-full flex items-center gap-3 px-4 py-3.5 border-b border-gray-50 last:border-b-0 hover:bg-blue-50 active:bg-blue-100 transition-colors text-left"
         @click="$router.push(item.route)"
       >
-        <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 text-secondary">
+        <div class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center shrink-0 text-secondary">
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
             <path stroke-linecap="round" stroke-linejoin="round" :d="item.iconPath" />
           </svg>
@@ -85,7 +85,7 @@
           <p class="text-sm font-medium text-primary">{{ item.title }}</p>
           <p class="text-xs text-gray-400 mt-0.5">{{ item.subtitle }}</p>
         </div>
-        <svg class="w-4 h-4 text-gray-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <svg class="w-4 h-4 text-gray-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
         </svg>
       </button>

@@ -35,13 +35,13 @@ const logout = () => {
         </NuxtLink>
 
         <div v-if="!token" class="flex items-center">
-          <NuxtLink to="/login">
+          <NuxtLink to="/auth/login">
             Login
           </NuxtLink>
 
           <NuxtLink
             class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium"
-            to="/register"
+            to="/auth/register"
           >
             Register
           </NuxtLink>

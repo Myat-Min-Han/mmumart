@@ -99,7 +99,7 @@ const handleRegister = async () => {
         </form>
         <div class="text-center text-sm">
           Already have an account? 
-          <NuxtLink to="/login" class="font-semibold">Log in</NuxtLink>
+          <NuxtLink to="/auth/login" class="font-semibold">Log in</NuxtLink>
         </div>
       </div>
     </section>

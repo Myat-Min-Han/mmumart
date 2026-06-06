@@ -7,11 +7,11 @@
       <h1 class="text-4xl font-bold mb-2">Discover Quality Campus Essentials.</h1>
       <p class="mb-4 text-gray-500">Buy, sell, and trade academic materials.</p>
 
-      <a href="/products" class="bg-white text-primary px-4 py-2 rounded-md mr-2 text-sm font-medium">
+      <a href="/items" class="bg-white text-primary px-4 py-2 rounded-md mr-2 text-sm font-medium">
         Start Exploring
       </a>
 
-      <a href="/listing" class="bg-blue-700 px-4 py-2 rounded-md text-sm font-medium">
+      <a href="/items/create" class="bg-blue-700 px-4 py-2 rounded-md text-sm font-medium">
         Become a Seller
       </a>
     </div>
@@ -67,7 +67,7 @@
         <h1 class="text-3xl font-semibold mb-2 text-primary">Your unused gear could be another student's breakthrough.</h1>
         <p class="text-gray-600 mb-4">Turn your materials into funds.</p>
 
-        <a href="/listing" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer">
+        <a href="/items/create" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer">
           Post your Item
         </a>
      </div>

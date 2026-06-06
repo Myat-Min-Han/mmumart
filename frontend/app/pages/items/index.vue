@@ -15,56 +15,7 @@ const minPrice = ref(0)
 const maxPrice = ref(1000);
 const page = ref(0);
 
-const products = [
-    {
-        id: 1,
-        name: 'Calculus: Early Transcendentals',
-        price: 85.00,
-        category: 'Textbooks',
-        image: '/img/textbooks.png',
-        condition: 'Like New'
-    },
-    {
-        id: 2,
-        name: 'Scientific Calculator Pro',
-        price: 45.00,
-        category: 'Electronics',
-        image: '/img/electronics.png',
-        condition: 'Good'
-    },
-    {
-        id: 3,
-        name: 'University Hoodie - Navy',
-        price: 35.00,
-        category: 'Campus Gear',
-        image: '/img/campus_gear.png',
-        condition: 'New'
-    },
-    {
-        id: 4,
-        name: 'Premium Notebook Set',
-        price: 12.00,
-        category: 'Stationary',
-        image: '/img/stationary.png',
-        condition: 'New'
-    },
-    {
-        id: 5,
-        name: 'Wireless Noise Cancelling Headphones',
-        price: 120.00,
-        category: 'Electronics',
-        image: '/img/electronics_2.png',
-        condition: 'Used - Excellent'
-    },
-    {
-        id: 6,
-        name: 'Waterproof Laptop Backpack',
-        price: 55.00,
-        category: 'Campus Gear',
-        image: '/img/campus_gear_2.png',
-        condition: 'Like New'
-    }
-]
+const products = await $fetch('http://localhost:5002/items');
 
 const toggleCategory = (categoryName) => {
     if (categoryName === 'All') {
@@ -85,7 +36,9 @@ const toggleCategory = (categoryName) => {
             selectedCategories.value.push(categoryName)
         }
     }
-}
+};
+
+
 </script>
 
 <template>
@@ -166,7 +119,7 @@ const toggleCategory = (categoryName) => {
                     </div>
                 </div>
             </aside>
-
+            
             <!-- Product Grid -->
             <div class="flex-1">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

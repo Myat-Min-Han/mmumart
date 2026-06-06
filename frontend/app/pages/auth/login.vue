@@ -82,7 +82,7 @@ const handleLogin = async () => {
         </form>
         <div class="text-center text-sm">
           New to MMUMART?
-          <NuxtLink to="/register" class="font-semibold">Create an Account</NuxtLink>
+          <NuxtLink to="/auth/register" class="font-semibold">Create an Account</NuxtLink>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, jsonify, request
 from sqlalchemy.orm import Session
-from backend.db.models.item import Item
+from db.models.item import Item
 from db.index import engine
 
 

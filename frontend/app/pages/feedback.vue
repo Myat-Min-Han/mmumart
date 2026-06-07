@@ -1,3 +1,23 @@
+<script setup>
+  const submitted = ref(false)
+
+  const form = ref({
+    type: '',
+    title: '',
+    description: ''
+  })
+
+  const submitFeedback = () => {
+    console.log(form)
+
+    submitted.value = true
+
+    setTimeout(() => {
+      submitted.value = false
+    }, 3000)
+  }
+</script>
+
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100 p-6">
     <div class="w-full max-w-lg bg-white rounded-3xl shadow-lg p-8">
@@ -59,25 +79,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { reactive, ref } from 'vue'
-
-const submitted = ref(false)
-
-const form = reactive({
-  type: '',
-  title: '',
-  description: ''
-})
-
-const submitFeedback = () => {
-  console.log(form)
-
-  submitted.value = true
-
-  setTimeout(() => {
-    submitted.value = false
-  }, 3000)
-}
-</script>

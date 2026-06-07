@@ -1,22 +1,18 @@
 
 <template>
   <div class="max-w-300 mx-auto px-4 mb-10">
-
-    <!-- Hero -->
     <div class="bg-primary text-white p-10 rounded-xl mt-4">
       <h1 class="text-4xl font-bold mb-2">Discover Quality Campus Essentials.</h1>
       <p class="mb-4 text-gray-500">Buy, sell, and trade academic materials.</p>
 
-      <a href="/items" class="bg-white text-primary px-4 py-2 rounded-md mr-2 text-sm font-medium">
+      <NuxtLink to="/items" class="bg-white text-primary px-4 py-2 rounded-md mr-2 text-sm font-medium">
         Start Exploring
-      </a>
+      </NuxtLink>
 
-      <a href="/items/create" class="bg-blue-700 px-4 py-2 rounded-md text-sm font-medium">
+      <NuxtLink to="/items/create" class="bg-blue-700 px-4 py-2 rounded-md text-sm font-medium">
         Become a Seller
-      </a>
+      </NuxtLink>
     </div>
-
-    <!-- Categories -->
     <div class="mt-8">
       <section class="flex items-center justify-between mb-5">
         <div>
@@ -24,7 +20,7 @@
           <p class=" text-gray-500 text-sm">Browse collections by campus department.</p>
         </div>
         <div>
-          <a href="/categories" class="font-medium hover:text-primary text-sm hover:underline">View All Categories</a>
+          <NuxtLink to="/categories" class="font-medium hover:text-primary text-sm hover:underline">View All Categories</NuxtLink>
         </div>
       </section>
       <section class="grid grid-cols-2 gap-2 ">
@@ -60,27 +56,24 @@
         </div>
       </section>
     </div>
-
-    <!-- CTA -->
     <div class="mt-8 bg-gray-50 p-6 rounded-lg shadow grid grid-cols-2">
-     <div>
-        <h1 class="text-3xl font-semibold mb-2 text-primary">Your unused gear could be another student's breakthrough.</h1>
-        <p class="text-gray-600 mb-4">Turn your materials into funds.</p>
+      <div>
+          <h1 class="text-3xl font-semibold mb-2 text-primary">Your unused gear could be another student's breakthrough.</h1>
+          <p class="text-gray-600 mb-4">Turn your materials into funds.</p>
 
-        <a href="/items/create" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer">
-          Post your Item
-        </a>
-     </div>
-     <div class="grid grid-cols-2 gap-6">
-        <div class="h-50">
-          <img src="/img/campus_gear_2.png" alt="campus_gear_2" class="w-full h-full object-cover rounded-lg rotate-6">
-        </div>
-        <div class="h-50">
-          <img src="/img/electronics_2.png" alt="electronics_2" class="w-full h-full object-cover rounded-lg -rotate-4">
-        </div>
-     </div>
+          <NuxtLink to="/items/create" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium cursor-pointer">
+            Post your Item
+          </NuxtLink>
+      </div>
+      <div class="grid grid-cols-2 gap-6">
+          <div class="h-50">
+            <img src="/img/campus_gear_2.png" alt="campus_gear_2" class="w-full h-full object-cover rounded-lg rotate-6">
+          </div>
+          <div class="h-50">
+            <img src="/img/electronics_2.png" alt="electronics_2" class="w-full h-full object-cover rounded-lg -rotate-4">
+          </div>
+      </div>
     </div>
-
   </div>
 </template>
 

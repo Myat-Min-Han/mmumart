@@ -1,22 +1,16 @@
 <script setup>
-const token = useCookie('jwt')
 
-const logout = () => {
-  token.value = null
-  navigateTo('/login')
-}
+const { token, clearAuth } = useAuth();
+
+const logout = () => clearAuth();
 </script>
 
 <template>
   <div>
     <nav class="flex justify-between items-center p-5">
-      
-      <!-- Logo -->
       <NuxtLink to="/" class="text-xl font-bold text-primary">
         MMUMART
       </NuxtLink>
-
-      <!-- Search -->
       <div class="relative border rounded-md px-3 flex items-center">
         <UIcon name="i-lucide-search" size="md" />
         <input
@@ -24,8 +18,6 @@ const logout = () => {
           class="pr-10 pl-2 py-2 focus:outline-none"
         />
       </div>
-
-      <!-- Right side -->
       <div class="flex items-center">
         <NuxtLink
           to="/feedback"
@@ -33,7 +25,6 @@ const logout = () => {
         >
           Feedback
         </NuxtLink>
-
         <div v-if="!token" class="flex items-center">
           <NuxtLink to="/auth/login">
             Login
@@ -46,7 +37,6 @@ const logout = () => {
             Register
           </NuxtLink>
         </div>
-
         <div v-else>
           <button
             @click="logout"
@@ -55,10 +45,8 @@ const logout = () => {
             Logout
           </button>
         </div>
-
       </div>
     </nav>
-
     <slot />
   </div>
 </template>

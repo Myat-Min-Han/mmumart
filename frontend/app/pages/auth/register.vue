@@ -26,7 +26,7 @@ const handleRegister = async () => {
       color: 'green'
     })
     
-    navigateTo('/login')
+    navigateTo('/auth/login')
   } catch (err) {
     toast.add({
       title: 'Error',

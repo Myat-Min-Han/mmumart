@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue'
 
 const form = ref({
   title: "",
   price: null,
+  custom_category: '',
   category: "",
   description: "",
   condition: "",
@@ -38,20 +38,16 @@ const removeImage = () => {
 
 <template>
   <div class="max-w-6xl mx-auto p-6 lg:p-10">
-    <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-primary">Create New Listing</h1>
+      <h1 class="text-3xl font-bold text-primary">Create New Item</h1>
       <p class="text-gray-500">Reach thousands of students by listing your item today</p>
     </div>
     
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-
-      <!-- LEFT: IMAGE UPLOAD (Column 1-5) -->
       <div class="lg:col-span-5 space-y-4">
         <label class="block text-sm font-semibold text-gray-700">
           Item Image
         </label>
-        
         <div
           @click="triggerFileInput"
           class="border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center hover:border-primary transition-colors cursor-pointer bg-gray-50 flex flex-col items-center justify-center min-h-100 relative overflow-hidden group"
@@ -70,8 +66,6 @@ const removeImage = () => {
               Supports: JPG, PNG, WEBP (Max 5MB)
             </p>
           </div>
-          
-          <!-- Image Preview -->
           <div v-else class="w-full h-full absolute inset-0">
             <img :src="form.image.url" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity space-y-3">
@@ -104,10 +98,7 @@ const removeImage = () => {
         </p>
       </div>
 
-      <!-- RIGHT: FORM (Column 6-12) -->
       <div class="lg:col-span-7 bg-white shadow-sm border border-gray-100 rounded-2xl p-8 space-y-6">
-        
-        <!-- Title -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
             Listing Title
@@ -119,8 +110,6 @@ const removeImage = () => {
             class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
           />
         </div>
-
-        <!-- Category + Price -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">
@@ -136,9 +125,19 @@ const removeImage = () => {
               <option>Services</option>
               <option>Campus Gear</option>
               <option>Stationary</option>
+              <option>Other</option>
             </select>
           </div>
-
+          <div v-if="form.category === 'Other'">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">
+              State your category
+            </label>
+            <input
+              v-model="form.custom_category"
+              type="text"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            />
+          </div>
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">
               Price (RM)
@@ -154,8 +153,6 @@ const removeImage = () => {
             </div>
           </div>
         </div>
-
-        <!-- Condition + Pickup Location -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">
@@ -186,7 +183,6 @@ const removeImage = () => {
           </div>
         </div>
 
-        <!-- Description -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
             Description
@@ -199,7 +195,6 @@ const removeImage = () => {
           />
         </div>
 
-        <!-- Submit -->
         <div class="pt-4">
           <button
             class="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl active:scale-[0.98] transition-all"
@@ -210,9 +205,7 @@ const removeImage = () => {
             By publishing, you agree to our Terms of Service and Community Guidelines.
           </p>
         </div>
-
       </div>
-
     </div>
   </div>
 </template>

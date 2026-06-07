@@ -12,6 +12,8 @@ const formData = ref({
 const isLoading = ref(false)
 const toast = useToast()
 
+const { setAuth } = useAuth();
+
 const handleLogin = async () => {
   isLoading.value = true
   try {
@@ -21,8 +23,7 @@ const handleLogin = async () => {
     });
 
     // set the cookie 
-    const token = useCookie('jwt')
-    token.value = response.token
+   setAuth(response.token, { email: formData.value.email })
     
     toast.add({
       title: 'Success',

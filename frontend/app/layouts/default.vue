@@ -1,7 +1,5 @@
 <script setup>
-
 const { token, clearAuth } = useAuth();
-
 const logout = () => clearAuth();
 </script>
 
@@ -15,37 +13,16 @@ const logout = () => clearAuth();
         <UIcon name="i-lucide-search" size="md" />
         <input
           placeholder="Search the product"
-          class="pr-10 pl-2 py-2 focus:outline-none"
-        />
+          class="pr-10 pl-2 py-2 focus:outline-none" />
       </div>
-      <div class="flex items-center">
-        <NuxtLink
-          to="/feedback"
-          class="mr-4"
-        >
-          Feedback
-        </NuxtLink>
-        <div v-if="!token" class="flex items-center">
-          <NuxtLink to="/auth/login">
-            Login
-          </NuxtLink>
 
-          <NuxtLink
-            class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium"
-            to="/auth/register"
-          >
-            Register
-          </NuxtLink>
+      <NuxtLink :to="token ? '/profile' : '/auth/login'" class="-mr-1">
+        <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300">
+          <svg class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 1118.88 6.196M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
         </div>
-        <div v-else>
-          <button
-            @click="logout"
-            class="ml-3 bg-primary text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+      </NuxtLink>
     </nav>
     <slot />
   </div>

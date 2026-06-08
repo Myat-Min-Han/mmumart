@@ -71,7 +71,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-// 假数据，之后换成 API 数据
+// change to API after this
 const transactions = ref([
   { id: 1, item: 'Mechanical Keyboard',  date: '2 Jun 2025', amount: 180.00 },
   { id: 2, item: 'Wireless Mouse',       date: '28 May 2025', amount: 52.00 },

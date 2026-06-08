@@ -8,12 +8,6 @@ const logout = () => clearAuth();
       <NuxtLink to="/" class="text-xl font-bold text-primary">
         MMUMART
       </NuxtLink>
-      <div class="relative border rounded-md px-3 flex items-center">
-        <UIcon name="i-lucide-search" size="md" />
-        <input
-          placeholder="Search the product"
-          class="pr-10 pl-2 py-2 focus:outline-none" />
-      </div>
       <div class="flex items-center gap-4">
         <NuxtLink to="/feedback">
           Feedback

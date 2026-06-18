@@ -1,6 +1,6 @@
 
 <template>
-  <div class="max-w-300 mx-auto px-4 mb-10">
+  <div class="max-w-7xl mx-auto px-4 mb-10">
     <div class="bg-primary text-white p-10 rounded-xl mt-4">
       <h1 class="text-4xl font-bold mb-2">Discover Quality Campus Essentials.</h1>
       <p class="mb-4 text-gray-500">Buy, sell, and trade academic materials.</p>

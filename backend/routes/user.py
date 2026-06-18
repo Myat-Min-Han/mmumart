@@ -70,3 +70,41 @@ def profile():
             "name": user.name
         }), 200
 
+@user_bp.route("/delete", methods=["DELETE"])
+@token_required
+def delete_user():
+    user_id = g.current_user.get('user_id')
+    with Session(engine) as session:
+        user = session.query(User).filter_by(id=user_id).first()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+        session.delete(user)
+        session.commit()
+    return jsonify({"message": "User deleted successfully"}), 200
+
+@user_bp.route("/update", methods=["PUT"])
+@token_required
+def update_user():
+    user_id = g.current_user.get("user_id")
+    data = request.json
+    name = data.get("name")
+    email = data.get("email")
+    password = data.get("password")
+
+    with Session(engine) as session:
+        user = session.query(User).filter_by(id=user_id).first()
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        if name:
+            user.name = name
+        if email:
+            # prevent duplicate email
+            if session.query(User).filter(User.email == email, User.id != user_id).first():
+                return jsonify({"error": "Email already in use"}), 400
+            user.email = email
+        if password:
+            user.password = generate_password_hash(password)
+
+        session.commit()
+        return jsonify({"message": "User updated successfully"}), 200

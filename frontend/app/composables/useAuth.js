@@ -1,6 +1,6 @@
 export const useAuth = () => {
   const token = useState('jwt', () => null) 
-  const user = useState('user', () => null)   
+  const user = useState('user', () => null)
 
   const tokenCookie = useCookie('jwt')
 
@@ -8,10 +8,16 @@ export const useAuth = () => {
     token.value = tokenCookie.value
   }
 
-  const setAuth = (newToken, userInfo = null) => {
+  const setAuth = (newToken, newUser = null) => {
     token.value = newToken
     tokenCookie.value = newToken
-    user.value = userInfo
+    if (newUser) {
+      user.value = newUser
+    }
+  }
+
+  const setUser = (newUser) => {
+    user.value = newUser
   }
 
   const clearAuth = () => {
@@ -20,5 +26,5 @@ export const useAuth = () => {
     user.value = null
   }
 
-  return { token, user, setAuth, clearAuth }
+  return { token, user, setAuth, setUser, clearAuth }
 }

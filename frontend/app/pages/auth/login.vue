@@ -23,7 +23,7 @@ const handleLogin = async () => {
     });
 
     // set the cookie 
-   setAuth(response.token, { email: formData.value.email })
+   setAuth(response.token)
     
     toast.add({
       title: 'Success',

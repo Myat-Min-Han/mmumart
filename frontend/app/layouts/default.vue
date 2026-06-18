@@ -1,6 +1,34 @@
 <script setup>
-const { token, clearAuth } = useAuth();
-const logout = () => clearAuth();
+const { token, user, setUser, clearAuth } = useAuth();
+
+const fetchProfile = async () => {
+  if (token.value && !user.value) {
+    try {
+      const data = await $fetch('http://localhost:5002/users/profile', {
+        headers: {
+          Authorization: `Bearer ${token.value}`
+        }
+      })
+      setUser(data)
+    } catch (err) {
+      console.error('Failed to fetch profile:', err)
+      if (err.status === 401) {
+        clearAuth()
+      }
+    }
+  }
+}
+
+onMounted(fetchProfile)
+
+watch(token, (newToken) => {
+  if (newToken) {
+    fetchProfile()
+  } else {
+    setUser(null)
+  }
+})
+
 </script>
 
 <template>
@@ -20,12 +48,7 @@ const logout = () => clearAuth();
               Register
           </NuxtLink>
         </template>
-        <button
-            v-else
-            @click="logout"
-          >
-            Logout
-        </button>
+        <UAvatar color="primary" :alt="user?.name || 'User'" v-else />
       </div>
     </nav>
     <slot />

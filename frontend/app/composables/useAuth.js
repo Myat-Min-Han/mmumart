@@ -14,11 +14,15 @@ export const useAuth = () => {
     user.value = userInfo
   }
 
+  const setUser = (userInfo) => {
+    user.value = userInfo
+  }
+
   const clearAuth = () => {
     token.value = null
     tokenCookie.value = null
     user.value = null
   }
 
-  return { token, user, setAuth, clearAuth }
+  return { token, user, setAuth, setUser, clearAuth }
 }

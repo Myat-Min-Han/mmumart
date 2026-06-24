@@ -53,7 +53,15 @@ def login():
         "exp": datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=1)  # expires in 1 hour
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-    return jsonify({"message": "Login successful!", "token": token}), 200
+    return jsonify({
+            "message": "Login successful!", 
+            "token": token,
+            "user": {
+                "id": user.id,
+                "email": user.email,
+                "name": user.name
+            }
+        }), 200
 
 @user_bp.route("/profile", methods=["GET"])
 @token_required

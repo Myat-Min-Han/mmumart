@@ -35,7 +35,7 @@ const items = [
   { label: 'Home', to: '/', icon: "home"  },
   { label: 'Discover', to: '/items', icon: 'search'},
   { label: 'Add Item', to: '/items/create' , icon: 'circle-fading-plus'},
-  { label: 'History', to: '/history', icon: 'history'},
+  { label: 'Mycart', to: '/mycart', icon: 'shopping-cart'},
   { label: 'Profile', to: '/profile', icon: 'circle-user'},
 ]
 

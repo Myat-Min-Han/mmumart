@@ -1,6 +1,8 @@
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy import String
 from typing import List
+
+from backend.db.models.cart import Cart
 from .base import Base
 
 class User(Base):
@@ -16,3 +18,5 @@ class User(Base):
         back_populates="owner", 
         cascade="all, delete-orphan"
     )
+    cart: Mapped["Cart"] = relationship("Cart", back_populates="user", uselist=False)
+    

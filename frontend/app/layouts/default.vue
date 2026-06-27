@@ -1,6 +1,6 @@
 <script setup>
 
-const { token, user, setAuth, setUser, clearAuth } = useAuth();
+const { token, user, setUser, clearAuth } = useAuth();
 
 const fetchProfile = async () => {
   if (token.value && !user.value) {
@@ -35,7 +35,7 @@ const items = [
   { label: 'Home', to: '/', icon: "home"  },
   { label: 'Discover', to: '/items', icon: 'search'},
   { label: 'Add Item', to: '/items/create' , icon: 'circle-fading-plus'},
-  { label: 'Mycart', to: '/mycart', icon: 'shopping-cart'},
+  { label: 'History', to: '/history', icon: 'history'},
   { label: 'Profile', to: '/profile', icon: 'circle-user'},
 ]
 

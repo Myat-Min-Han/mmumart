@@ -1,12 +1,13 @@
 import datetime
 import jwt
 from flask import Blueprint, request, jsonify, g
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from werkzeug.security import generate_password_hash, check_password_hash
-from decorators.auth import token_required
-from db.index import engine
-from db.models.user import User
-from config import SECRET_KEY
+from backend.decorators.auth import token_required
+from backend.db.index import engine
+from backend.models.user import User
+from backend.models.cart import CartItem, Cart
+from backend.config import SECRET_KEY
 
 user_bp = Blueprint("user", __name__, url_prefix="/users")
 
@@ -50,7 +51,7 @@ def login():
     payload = {
         "user_id": user.id,
         "email": user.email,
-        "exp": datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=1)  # expires in 1 hour
+        "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)  # expires in 1 hour
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     return jsonify({
@@ -62,6 +63,38 @@ def login():
                 "name": user.name
             }
         }), 200
+
+@user_bp.route("/history", methods=["GET"])
+@token_required
+def purchase_history():
+    user_id = g.current_user.get('user_id')
+    with Session(engine) as session:
+        cart_items = (
+            session.query(CartItem)
+            .options(joinedload(CartItem.item))
+            .join(Cart, CartItem.cart_id == Cart.id)
+            .filter(Cart.user_id == user_id)
+            .order_by(CartItem.created_at.desc())
+            .all()
+        )
+
+        history = [
+            {
+                "id": ci.id,
+                "cart_id": ci.cart_id,
+                "item_id": ci.item_id,
+                "name": ci.item.name if ci.item else 'Unknown item',
+                "description": ci.item.description if ci.item else None,
+                "price": float(ci.item.price) if ci.item and ci.item.price is not None else 0.0,
+                "quantity": ci.quantity,
+                "total": float(ci.item.price) * ci.quantity if ci.item and ci.item.price is not None else 0.0,
+                "status": "Purchased",
+                "date": ci.created_at.isoformat() if ci.created_at else None,
+            }
+            for ci in cart_items
+        ]
+
+    return jsonify(history), 200
 
 @user_bp.route("/profile", methods=["GET"])
 @token_required

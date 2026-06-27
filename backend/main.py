@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from routes.user import user_bp
-from routes.item import item_bp
+from backend.routes.user import user_bp
+from backend.routes.item import item_bp
+
 app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})

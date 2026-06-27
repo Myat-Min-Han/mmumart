@@ -1,8 +1,7 @@
-from flask import Blueprint, jsonify, jsonify, request
+from flask import Blueprint, jsonify, request
 from sqlalchemy.orm import Session
-from db.models.item import Item
-from db.index import engine
-
+from backend.models.item import Item
+from backend.db.index import engine
 
 item_bp = Blueprint('item', __name__, url_prefix='/items')
 @item_bp.route('/', methods=['GET'])

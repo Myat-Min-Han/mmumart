@@ -1,10 +1,7 @@
-from ast import List
-
+from typing import List
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, ForeignKey
-
-from backend.db.models.cart import CartItem
-from .base import Base 
+from .base import Base
 
 class Item(Base):
     __tablename__ = 'items'
@@ -17,3 +14,12 @@ class Item(Base):
 
     owner: Mapped["User"] = relationship("User", back_populates="items")
     cart_items: Mapped[List["CartItem"]] = relationship("CartItem", back_populates="item")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "price": self.price,
+            "user_id": self.user_id,
+        }

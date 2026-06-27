@@ -1,7 +1,7 @@
+from backend.models import cart, item
 from sqlalchemy import create_engine
-from db.models.base import Base
-from db.models.user import User
-from db.models.item import Item
+from backend.models.base import Base
+from backend.models import user, item, cart
 
 engine = create_engine(
     'postgresql://neondb_owner:npg_HoOAUYMB73XC@ep-raspy-cell-am24q0px-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'

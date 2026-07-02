@@ -17,7 +17,7 @@ const { setAuth } = useAuth();
 const handleLogin = async () => {
   isLoading.value = true
   try {
-    const response = await $fetch('http://localhost:5002/users/login', {
+    const response = await $fetch('http://localhost:5000/users/login', {
       method: 'POST',
       body: formData.value
     });

@@ -15,7 +15,7 @@ const minPrice = ref(0)
 const maxPrice = ref(1000)
 
 const { data: products, pending, error } = useAsyncData('products', () =>
-  $fetch('http://localhost:5002/items')
+  $fetch('http://localhost:5000/items')
 )
 
 const toggleCategory = (categoryName) => {

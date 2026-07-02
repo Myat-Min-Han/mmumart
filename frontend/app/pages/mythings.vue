@@ -84,7 +84,7 @@ const loading = ref(true)
 
 onMounted(async () => {
   try {
-    const allItems = await $fetch('http://localhost:5002/items/')
+    const allItems = await $fetch('http://localhost:5000/items')
     // Filter items that belong to the current logged in user
     myItems.value = allItems.filter(item => item.user_id === user.value?.id)
   } catch (err) {
@@ -96,7 +96,7 @@ onMounted(async () => {
 
 const deleteItem = async (id) => {
   try {
-    await $fetch(`http://localhost:5002/items/${id}`, { method: 'DELETE' })
+    await $fetch(`http://localhost:5000/items/${id}`, { method: 'DELETE' })
     myItems.value = myItems.value.filter(item => item.id !== id)
   } catch (err) {
     console.error('Failed to delete item:', err)

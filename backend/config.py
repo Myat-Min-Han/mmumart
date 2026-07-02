@@ -1,1 +1,0 @@
-SECRET_KEY = "David is GOATED"

@@ -15,9 +15,8 @@ const minPrice = ref(0)
 const maxPrice = ref(1000)
 
 const { data: products, pending, error } = useAsyncData('products', () =>
-  $fetch('http://localhost:5000/items')
+  $fetch('http://localhost:5002/items')
 )
-
 const toggleCategory = (categoryName) => {
   if (categoryName === 'All') {
     selectedCategories.value = ['All']
@@ -48,7 +47,7 @@ const toggleCategory = (categoryName) => {
           <h1 class="text-3xl font-bold text-primary mb-2">Campus Marketplace</h1>
           <p class="text-gray-600">Find the curated academic resources and student essentials within your campus community</p>
         </div>
-        <div class="flex items-center gap-2" v-if="products & products.length > 0">
+        <div class="flex items-center gap-2" v-if="Array.isArray(products) && products.length > 0">
           <span class="text-sm text-gray-500 whitespace-nowrap">Sort by:</span>
           <select v-model="sortBy" class="text-sm border-none bg-transparent font-medium focus:ring-0 cursor-pointer">
             <option v-for="option in sortOptions" :key="option" :value="option">{{ option }}</option>
@@ -58,7 +57,7 @@ const toggleCategory = (categoryName) => {
     </section>
 
     <section class="flex flex-col md:flex-row gap-8">
-      <aside class="w-full md:w-64 shrink-0" v-if="products && products.length > 0">
+      <aside class="w-full md:w-64 shrink-0" v-if="Array.isArray(products) && products.length > 0">
         <!-- Categories -->
         <div class="space-y-8 sticky top-8">
           <div>

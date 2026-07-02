@@ -1,23 +1,22 @@
-import express from 'express';
-import userRoutes from './routes/user.js';
-import itemRoutes from './routes/item.js';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
+const userRoutes = require('./routes/user.js');
+const itemRoutes = require('./routes/item.js');
 
 const app = express();
-app.use(express.json());
+const port = 5002;
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Replace with your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: 'http://localhost:3000', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
 }));
 
-const port = 5000;
-
-app.use('/users', userRoutes);
-app.use('/items', itemRoutes);
-
+app.use(express.json());
+app.use('/api/users', userRoutes);
+app.use('/api/items', itemRoutes);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Server is running on port ${port}`);
+});

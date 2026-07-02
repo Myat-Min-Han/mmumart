@@ -1,7 +1,7 @@
-import express from "express";
-import bcrypt from "bcryptjs";
-import { generateToken, tokenRequired } from "../middlewares/auth";
-import prisma from "../prisma/client";
+const express = require("express");
+const bcrypt = require("bcrypt");
+const { generateToken, tokenRequired } = require("../middlewares/auth.js");
+const { User, Cart, CartItem, Item } = require("../models");
 
 const router = express.Router();
 
@@ -11,12 +11,10 @@ router.post("/register", async (req, res) => {
   try {
     const hashed = await bcrypt.hash(password, 10);
 
-    const user = await prisma.user.create({
-      data: {
-        email,
-        password: hashed,
-        name,
-      },
+    await User.create({
+      email,
+      password: hashed,
+      name,
     });
 
     res.json({ message: "User registered" });
@@ -29,7 +27,7 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await User.findOne({ where: { email } });
     if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
     const valid = await bcrypt.compare(password, user.password);
@@ -44,7 +42,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/profile", tokenRequired, async (req, res) => {
   try {
-    const user = await prisma.user.findUnique({ where: { id: req.user } });
+    const user = await User.findByPk(req.user);
     if (!user) return res.status(404).json({ message: "User not found" });
 
     res.json({ id: user.id, email: user.email, name: user.name });
@@ -55,25 +53,24 @@ router.get("/profile", tokenRequired, async (req, res) => {
 
 router.get("/history", tokenRequired, async (req, res) => {
   try {
-    const carts = await prisma.cart.findMany({
+    const carts = await Cart.findAll({
       where: { userId: req.user },
-      include: {
-        items: {
-          include: {
-            item: true, 
-          },
+      include: [
+        {
+          model: CartItem,
+          include: [Item],
         },
-      },
-      orderBy: { createdAt: "desc" },
+      ],
+      order: [["createdAt", "DESC"]],
     });
 
     const history = carts.map(cart => ({
       cartId: cart.id,
       createdAt: cart.createdAt,
-      items: cart.items.map(ci => ({
-        id: ci.item.id,
-        name: ci.item.name,
-        price: ci.item.price,
+      items: cart.CartItems.map(ci => ({
+        id: ci.Item.id,
+        name: ci.Item.name,
+        price: ci.Item.price,
         quantity: ci.quantity,
       })),
     }));

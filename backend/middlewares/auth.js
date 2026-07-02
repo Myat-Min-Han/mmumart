@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+const jwt = require("jsonwebtoken");
 
 const SECRET_KEY = "mmumartgroup1";
 

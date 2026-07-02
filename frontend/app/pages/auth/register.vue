@@ -15,7 +15,7 @@ const toast = useToast()
 const handleRegister = async () => {
   isLoading.value = true
   try {
-    const response = await $fetch('http://localhost:5000/users/register', {
+    const response = await $fetch('http://localhost:5002/users/register', {
       method: 'POST',
       body: formData.value
     })

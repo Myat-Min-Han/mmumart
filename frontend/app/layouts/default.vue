@@ -5,7 +5,7 @@ const { token, user, setUser, clearAuth } = useAuth();
 const fetchProfile = async () => {
   if (token.value && !user.value) {
     try {
-      const data = await $fetch('http://localhost:5002/users/profile', {
+      const data = await $fetch('http://localhost:5002/api/users/profile', {
         headers: {
           Authorization: `Bearer ${token.value}`
         }

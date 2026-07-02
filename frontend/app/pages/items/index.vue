@@ -15,7 +15,11 @@ const minPrice = ref(0)
 const maxPrice = ref(1000)
 
 const { data: products, pending, error } = useAsyncData('products', () =>
-  $fetch('http://localhost:5002/items')
+  $fetch('http://localhost:5002/api/items', {
+    headers: {
+      Authorization: `Bearer ${useAuth().token.value}`
+    }
+  })
 )
 const toggleCategory = (categoryName) => {
   if (categoryName === 'All') {

@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { generateToken, tokenRequired } = require("../middlewares/auth.js");
-const { User, Cart, CartItem, Item } = require("../models");
+const { User, History } = require("../models");
 
 const router = express.Router();
 
@@ -53,26 +53,22 @@ router.get("/profile", tokenRequired, async (req, res) => {
 
 router.get("/history", tokenRequired, async (req, res) => {
   try {
-    const carts = await Cart.findAll({
+    const rows = await History.findAll({
       where: { userId: req.user },
-      include: [
-        {
-          model: CartItem,
-          include: [Item],
-        },
-      ],
       order: [["createdAt", "DESC"]],
     });
 
-    const history = carts.map(cart => ({
-      cartId: cart.id,
-      createdAt: cart.createdAt,
-      items: cart.CartItems.map(ci => ({
-        id: ci.Item.id,
-        name: ci.Item.name,
-        price: ci.Item.price,
-        quantity: ci.quantity,
-      })),
+    const history = rows.map(row => ({
+      id: row.id,
+      item_id: row.itemId,
+      cart_id: row.cartId,
+      name: row.name,
+      description: row.description,
+      price: row.price,
+      quantity: row.quantity,
+      total: row.total,
+      status: row.status,
+      date: row.createdAt,
     }));
 
     res.json(history);

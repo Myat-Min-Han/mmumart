@@ -35,9 +35,45 @@ const items = [
   { label: 'Home', to: '/', icon: "home"  },
   { label: 'Discover', to: '/items', icon: 'search'},
   { label: 'Add Item', to: '/items/create' , icon: 'circle-fading-plus'},
+  { label: 'Chat', to: '/chat', icon: 'message-circle'},
   { label: 'History', to: '/history', icon: 'history'},
   { label: 'Profile', to: '/profile', icon: 'circle-user'},
 ]
+
+const cartCount = ref(0)
+
+const fetchCartCount = async () => {
+  if (!token.value) {
+    cartCount.value = 0
+    return
+  }
+
+  try {
+    const data = await $fetch('http://localhost:5002/api/items/cart', {
+      headers: {
+        Authorization: `Bearer ${token.value}`
+      }
+    })
+
+    cartCount.value = Array.isArray(data) ? data.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0) : 0
+  } catch (err) {
+    console.error('Failed to fetch cart count:', err)
+    cartCount.value = 0
+  }
+}
+
+onMounted(() => {
+  fetchCartCount()
+  window.addEventListener('cart:refresh', fetchCartCount)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('cart:refresh', fetchCartCount)
+})
+
+watch(token, () => {
+  fetchCartCount()
+})
 
 </script>
 
@@ -64,8 +100,11 @@ const items = [
     <div class="flex-1">
       <nav class="flex justify-end items-center p-5 bg-white shadow">
         <div class="flex items-center gap-4">
-          <NuxtLink :to="token ? '/cart' : '/auth/login'">
-           <UIcon name="i-lucide-shopping-cart" class="size-5"/>
+          <NuxtLink :to="token ? '/cart' : '/auth/login'" class="relative">
+            <UIcon name="i-lucide-shopping-cart" class="size-5"/>
+            <span v-if="cartCount > 0" class="absolute -top-2 -right-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold text-white">
+              {{ cartCount }}
+            </span>
           </NuxtLink>
           <template v-if="!token">
             <NuxtLink to="/auth/login">Login</NuxtLink>

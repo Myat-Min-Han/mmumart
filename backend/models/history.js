@@ -1,50 +1,47 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const Item = sequelize.define('Item', {
+const History = sequelize.define('History', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  title: {
-    type: DataTypes.STRING,
+  cartId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  price: {
-    type: DataTypes.FLOAT,
+  itemId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  name: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   description: {
     type: DataTypes.TEXT,
     allowNull: true,
   },
-  category: {
-    type: DataTypes.STRING,
-    allowNull: false, 
-  },
-  condition: {
-    type: DataTypes.STRING,
-    allowNull: false, 
+  price: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
   },
   quantity: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  pickupLocation: {
-    type: DataTypes.STRING,
-    allowNull: true, 
-  },
-  imageUrl: {
-    type: DataTypes.STRING,
+  total: {
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
-  imagePublicId: {
+  status: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+    defaultValue: 'Purchased',
+  },
 }, {
   timestamps: true,
 });
 
-module.exports = Item;
+module.exports = History;

@@ -6,10 +6,14 @@ const form = ref({
   custom_category: '',
   category: "",
   description: "",
+  quantity: 1,
   condition: "",
   location: "",
   image: null
-})
+});
+
+const uploading = ref(false);
+const error = ref(null);
 
 const fileInput = ref(null)
 
@@ -33,6 +37,48 @@ const handleFileUpload = (event) => {
 
 const removeImage = () => {
   form.value.image = null
+};
+
+
+const handleSubmit = async () => {
+  uploading.value = true
+  error.value = null;
+
+  const { token } = useAuth()
+
+  try {
+    const payload = {
+      title: form.value.title,
+      price: form.value.price,
+      category: form.value.category,
+      quantity: form.value.quantity || 1,
+      description: form.value.description,
+      condition: form.value.condition,
+      pickupLocation: form.value.location,
+      image: form.value.image?.url || null,
+    }
+
+    if (form.value.category === "Other") {
+      payload.custom_category = form.value.custom_category
+    }
+
+    const response = await $fetch("http://localhost:5002/api/items", {
+      method: "POST",
+      body: payload,
+      headers: {
+        "Authorization": `Bearer ${token.value}`
+      }
+    })
+
+    console.log("Item created:", response);
+    navigateTo("/items") 
+  } catch (err) {
+    error.value = err?.data?.message || err.message || 'Failed to create item'
+    console.error("Error creating item:", err);
+    uploading.value = false
+  } finally {
+    uploading.value = false
+  }
 }
 </script>
 
@@ -184,6 +230,18 @@ const removeImage = () => {
         </div>
 
         <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">
+              Quantity
+            </label>
+            <input
+              v-model="form.quantity"
+              type="number"
+              placeholder="e.g. 5"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+            />
+        </div>
+
+        <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
             Description
           </label>
@@ -196,10 +254,13 @@ const removeImage = () => {
         </div>
 
         <div class="pt-4">
+          <small v-if="error" class="text-red-500 text-sm mb-2 block">{{ error }}</small>
           <button
             class="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl active:scale-[0.98] transition-all"
+            @click="handleSubmit"
+            :disabled="uploading"
           >
-            Publish Listing
+            {{ uploading ? 'Publishing...' : 'Publish Listing' }}
           </button>
           <p class="text-center text-xs text-gray-500 mt-4">
             By publishing, you agree to our Terms of Service and Community Guidelines.

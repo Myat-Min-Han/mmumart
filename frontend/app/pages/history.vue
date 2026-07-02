@@ -15,7 +15,7 @@ const fetchHistory = async () => {
   errorMessage.value = null
 
   try {
-    const data = await $fetch('http://localhost:5002/users/history', {
+    const data = await $fetch('http://localhost:5002/api/users/history', {
       headers: {
         Authorization: `Bearer ${token.value}`,
       },

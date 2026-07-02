@@ -22,4 +22,8 @@ function tokenRequired(req, res, next) {
   }
 }
 
-module.exports = { generateToken, tokenRequired };
+function verifyToken(token) {
+  return jwt.verify(token, SECRET_KEY);
+}
+
+module.exports = { generateToken, tokenRequired, verifyToken };

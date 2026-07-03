@@ -18,8 +18,7 @@ const sequelize = new Sequelize(process.env.DB_URL, {
     await sequelize.authenticate();
     require('./models');
     await sequelize.sync({ alter: true });
-    console.log('Connected to Neon Postgres via Sequelize');
-    console.log('Sequelize tables synced successfully');
+    console.log('Connected to Neon Postgres via Sequelize. Sequelize tables synced successfully');
   } catch (error) {
     console.error('Connection failed:', error);
   }

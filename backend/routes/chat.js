@@ -1,7 +1,7 @@
 const express = require("express");
 const { Op } = require("sequelize");
 const { tokenRequired } = require("../middlewares/auth.js");
-const { ChatConversation, ChatMessage, Item, User } = require("../models");
+const { ChatConversation, ChatMessage, Item, User } = require("../models/index.js");
 
 const router = express.Router();
 
